@@ -1,0 +1,91 @@
+let points = [
+  { x: -32.122220, y: 68.20995 },
+  { x: -30.82615, y: 56.86854 },
+  { x: -9.684385, y: 68.69496 },
+  { x: -9.473985, y: 72.68936 }, // <-- updated Point 4
+  { x: -9.684385, y: 68.69496 },
+  { x: -9.473985, y: 72.68936 }  // <-- also update duplicate Point 6
+];
+
+function setup() {
+  createCanvas(600, 400);
+  background(240);
+  noLoop();
+
+  // Scaling for visualization
+  let minX = min(points.map(p => p.x));
+  let maxX = max(points.map(p => p.x));
+  let minY = min(points.map(p => p.y));
+  let maxY = max(points.map(p => p.y));
+
+  // Mapped screen points for drawing
+  let screenPoints = points.map(p => {
+    return {
+      x: map(p.x, minX, maxX, 50, width - 50),
+      y: map(p.y, minY, maxY, height - 50, 50)  // invert y-axis
+    };
+  });
+
+  // Draw polygon
+  stroke(0);
+  fill(100, 200, 255, 100);
+  beginShape();
+  for (let sp of screenPoints) {
+    vertex(sp.x, sp.y);
+  }
+  endShape(CLOSE);
+
+  // Draw and label points
+  fill(255, 0, 0);
+  for (let i = 0; i < screenPoints.length; i++) {
+    let sp = screenPoints[i];
+    ellipse(sp.x, sp.y, 8, 8);
+    fill(0);
+    text(`P${i + 1}`, sp.x + 5, sp.y - 5);
+    fill(255, 0, 0);
+  }
+
+  // Annotate edges with distances
+  textSize(12);
+  fill(0);
+  for (let i = 0; i < points.length; i++) {
+    let j = (i + 1) % points.length;
+
+    // Real-world distance
+    let dx = points[j].x - points[i].x;
+    let dy = points[j].y - points[i].y;
+    let distMeters = Math.sqrt(dx * dx + dy * dy);
+
+    // Midpoint for label placement
+    let midX = (screenPoints[i].x + screenPoints[j].x) / 2;
+    let midY = (screenPoints[i].y + screenPoints[j].y) / 2;
+
+    // Offset to avoid overlapping lines
+    text(`${distMeters.toFixed(2)} m`, midX + 5, midY - 5);
+  }
+
+  // Area calculation using Shoelace formula
+  let area = shoelaceArea(points);
+  let areaInCents = area / 40.4686;
+
+  // Display area
+  fill(0);
+  textSize(16);
+  text(`Area: ${area.toFixed(2)} m²`, 20, height - 40);
+  text(`Area: ${areaInCents.toFixed(2)} cents`, 20, height - 20);
+}
+
+// Shoelace formula
+function shoelaceArea(pts) {
+  let n = pts.length;
+  let sum1 = 0;
+  let sum2 = 0;
+
+  for (let i = 0; i < n; i++) {
+    let j = (i + 1) % n;
+    sum1 += pts[i].x * pts[j].y;
+    sum2 += pts[j].x * pts[i].y;
+  }
+
+  return Math.abs(sum1 - sum2) / 2;
+}
