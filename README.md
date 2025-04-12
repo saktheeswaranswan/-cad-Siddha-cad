@@ -1,3 +1,87 @@
+
+🧠 Operators & Construction Rules (Summarized)
+Symbol	Meaning
+mI	Extrusion (Prism-like growth)
+m>	Tapering (makes pyramids, cones)
+mO	Rotation (generates surfaces of revolution—cylinders, spheres, tori)
+m[n]	Cartesian product (makes higher-dimensional prisms, duoprisms, etc.)
+m(n)	Fiber bundle (used to build complex or layered shapes)
+I	Line
+II	Square
+I>	Triangle
+IO	Circle
+III	Cube
+IOO	Sphere
+IO(O)	Torus
+IO>	Cone
+IOI	Cylinder
+I>>	Tetrahedron
+I>I	Triangle Prism
+II>	Square Pyramid
+Would you like to:
+
+Visualize some of these with plots?
+
+Define your own shape using this system?
+
+Build a new operator-based shape grammar?
+
+Turn this into a LaTeX document or interactive reference?
+
+Let’s get creative with it!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 cone
 
 abs(sqrt(x^2+y^2) +2*z) + sqrt(x^2+y^2) - 3
