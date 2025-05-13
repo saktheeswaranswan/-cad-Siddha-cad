@@ -1,4 +1,52 @@
+Here's a clean table representation of your shapes and operators using WxMaxima-compatible syntax for implicit surfaces. I've formatted each shape into a clear equation or inequality form, which you can directly use or adapt in WxMaxima for plotting or symbolic work.
 
+📐 Basic and Composite Shapes with WxMaxima Syntax
+Shape Name	Equation (WxMaxima Syntax)
+Cone	abs(sqrt(x^2 + y^2) + 2*z) + sqrt(x^2 + y^2) - 3
+abs(sqrt(x^2 + y^2) + 2*z) + sqrt(x^2 + y^2) - 6
+abs(sqrt(x^2 + y^2) - z) + abs(sqrt(x^2 + y^2) + z) - 6
+Torus	(sqrt(x^2 + y^2) - 2)^2 + z^2 - 3
+Cylinder	abs(sqrt(x^2 + y^2) - z) + abs(sqrt(x^2 + y^2) + z) - 6
+Tetrahedron	abs(abs(abs(x) + 2*y) + abs(x) + 2*z) + abs(abs(x) + 2*y) + abs(x) - 3
+Triangle Prism	abs(abs(abs(x) + 2*y) + abs(x) - z) + abs(abs(abs(x) + 2*y) + abs(x) + z) - 2
+Square Pyramid	abs(abs(x - y) + abs(x + y) + 3*z) + abs(x - y) + abs(x + y) - 2
+Cube	abs(abs(x - y) + abs(x + y) - 2*z) + abs(abs(x - y) + abs(x + y) + 2*z) - 5
+abs(abs((x / 9.2) - y) + abs((x / 9.2) + y) - 2*z) + abs(abs((x / 9.2) - y) + abs((x / 9.2) + y) + 2*z) - 5
+House Tetrahedron	abs(abs(abs(x) - y) + abs(x) + abs(y) + 3*z) + abs(abs(abs(x) - y) + abs(x) + abs(y) - z) - 2
+Elephant	abs(x*y) - z + abs(x*z) - y + abs(z*y) - x - z^2 - x^2 - y^2 - (x*y*z) + 1 - (x*y)^2
+
+🔧 Construction Operators (Symbolic Form)
+Operator	Definition (WxMaxima Syntax)
+Extrude (mI)	abs(m - x_n) + abs(m + x_n) = a
+Taper (m>)	abs(m + 2*x_n) + m = a
+Rotate (mIO)	abs(m - sqrt(x_n^2 + x_k^2)) + abs(m + sqrt(x_n^2 + x_k^2)) = a
+Non-Intersect Rotate (mI(O))	abs(m - (sqrt(x_n^2 + x_k^2) - a)) + abs(m + (sqrt(x_n^2 + x_k^2) - a)) = b
+Cartesian Product (m[n])	abs(m - n) + abs(m + n) = a
+
+🧱 Dimensional Building Blocks
+Dimension	Shape	WxMaxima Definition
+1D	Line (I)	abs(x) = a
+2D	Circle (IO), Square (II)	sqrt(x^2 + y^2) = a, abs(x - y) + abs(x + y) = a
+Triangle (I>)	abs(abs(x) + 2*y) + abs(x) = a
+3D	Sphere (IOO)	sqrt(x^2 + y^2 + z^2) = a
+Torus (IO(O))	(sqrt(x^2 + y^2) - a)^2 + z^2 = b^2
+Cone (IO>)	abs(sqrt(x^2 + y^2) + 2*z) + sqrt(x^2 + y^2) = a
+Cylinder (IOI)	abs(sqrt(x^2 + y^2) - z) + abs(sqrt(x^2 + y^2) + z) = a
+Tetrahedron (I>>)	abs(abs(abs(x) + 2*y) + abs(x) + 2*z) + abs(abs(x) + 2*y) + abs(x) = a
+Triangle Prism (I>I)	abs(abs(abs(x) + 2*y) + abs(x) - z) + abs(abs(abs(x) + 2*y) + abs(x) + z) = a
+Square Pyramid (II>)	abs(abs(x - y) + abs(x + y) + 3*z) + abs(x - y) + abs(x + y) = a
+Cube (III)	abs(abs(x - y) + abs(x + y) - 2*z) + abs(abs(x - y) + abs(x + y) + 2*z) = a
+
+If you want these plotted in WxMaxima, you can use the implicit_plot3d function, e.g.:
+
+maxima
+Copy
+Edit
+load(draw)$
+draw3d(
+    implicit(sqrt(x^2 + y^2) + 2*z + sqrt(x^2 + y^2) - 3 = 0, x, -5, 5, y, -5, 5, z, -5, 5)
+);
+Let me know if you want a .wxm file or a rendered plot!
 
 
 
